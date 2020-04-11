@@ -110,6 +110,15 @@ class SignUp extends Component {
             )}
           </div>
 
+          {errors.general && (
+            <>
+              <span className="red-text" style={{ marginTop: 5 }}>
+                {errors.general}
+              </span>
+              <br />
+            </>
+          )}
+
           <button className="btn pink lighten-1 z-index-0" disabled={loading}>
             Sign up
           </button>
