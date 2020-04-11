@@ -10,6 +10,6 @@ export const CLEAR_ERRORS = "CLEAR_ERRORS";
 export const LOADING_DATA = "LOADING_DATA";
 export const STOP_LOADING_UI = "STOP_LOADING_UI";
 // Data reducer types
-export const SET_SCREAMS = "SET_PROJECTS";
-export const SET_SCREAM = "SET_PROJECT";
+export const SET_PROJECTS = "SET_PROJECTS";
+export const SET_PROJECT = "SET_PROJECT";
 export const POST_PROJECT = "POST_PROJECT";
