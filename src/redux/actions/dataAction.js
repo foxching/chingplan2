@@ -44,6 +44,7 @@ export const getProject = projectId => dispatch => {
 };
 
 // Post a project
+
 export const postProject = (newProject, history) => dispatch => {
   dispatch({ type: LOADING_UI });
   axios
