@@ -5,11 +5,11 @@ import ProjectList from "../projects/ProjectList";
 import { getProjects } from "../../redux/actions/dataAction";
 
 class Dashboard extends Component {
-  UNSAFE_componentWillMount() {
+  componentDidMount() {
     this.props.getProjects();
   }
   render() {
-    const { projects, loading } = this.props.data;
+    const { projects } = this.props.data;
     return (
       <div className="dashboard container">
         <div className="row">
