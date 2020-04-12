@@ -2,6 +2,7 @@ import {
   SET_PROJECTS,
   SET_PROJECT,
   POST_PROJECT,
+  SET_NOTIFICATIONS,
   LOADING_DATA,
   SET_ERRORS,
   CLEAR_ERRORS,
@@ -79,6 +80,24 @@ export const getUserData = userHandle => dispatch => {
       dispatch({
         type: SET_PROJECTS,
         payload: null
+      });
+    });
+};
+
+export const getNotifications = () => dispatch => {
+  dispatch({ type: LOADING_DATA });
+  axios
+    .get("/notifications")
+    .then(res => {
+      dispatch({
+        type: SET_NOTIFICATIONS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: SET_NOTIFICATIONS,
+        payload: []
       });
     });
 };
