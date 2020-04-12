@@ -11,6 +11,8 @@ import SignUp from "./components/auth/SignUp";
 import { logoutUser, getUserData } from "./redux/actions/userAction";
 import { SET_AUTHENTICATED } from "./redux/types";
 import jwtDecode from "jwt-decode";
+import AuthRoute from "./util/AuthRoute";
+import PrivateRoute from "./util/PrivateRoute";
 
 import axios from "axios";
 
@@ -39,10 +41,13 @@ class App extends Component {
             <Navbar />
             <Switch>
               <Route path="/" component={Dashboard} exact />
-              <Route path="/project/:id" component={ProjectDetails} />
-              <Route path="/create" component={CreateProject} />
-              <Route path="/signin" component={SignIn} />
-              <Route path="/signup" component={SignUp} />
+              <PrivateRoute
+                path="/project/:projectId"
+                component={ProjectDetails}
+              />
+              <PrivateRoute path="/create" component={CreateProject} />
+              <AuthRoute path="/signin" component={SignIn} />
+              <AuthRoute path="/signup" component={SignUp} />
             </Switch>
           </div>
         </BrowserRouter>

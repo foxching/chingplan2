@@ -9,6 +9,7 @@
   "main": "src/index.js",
   "dependencies": {
     "axios": "0.19.2",
+    "dayjs": "1.8.24",
     "jwt-decode": "2.2.0",
     "moment": "2.24.0",
     "react": "16.12.0",

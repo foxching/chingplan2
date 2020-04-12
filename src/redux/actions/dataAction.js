@@ -44,7 +44,7 @@ export const getProject = projectId => dispatch => {
 };
 
 // Post a project
-export const postProject = newProject => dispatch => {
+export const postProject = (newProject, history) => dispatch => {
   dispatch({ type: LOADING_UI });
   axios
     .post("/project", newProject)
@@ -54,6 +54,7 @@ export const postProject = newProject => dispatch => {
         payload: res.data
       });
       dispatch(clearErrors());
+      history.push("/");
     })
     .catch(err => {
       dispatch({
