@@ -56,3 +56,15 @@ textarea.materialize-textarea:focus:not([readonly]) {
   margin-bottom: 7px;
   width: 200px;
 }
+.skeleton-notif-content {
+  background-color: lightgray;
+  height: 10px;
+  width: 200px;
+  margin-bottom: 7px;
+}
+.skeleton-notif-date {
+  background-color: lightgray;
+  height: 10px;
+  width: 150px;
+  margin-bottom: 7px;
+}

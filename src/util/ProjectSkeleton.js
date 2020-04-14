@@ -3,7 +3,7 @@ import React from "react";
 const ProjectSkeleton = () => {
   const content = Array.from({ length: 1 }).map((index, item) => {
     return (
-      <div className="container section project-details">
+      <div key={index} className="container section project-details">
         <div className="card z-depth-0 project-details">
           <div className="card-content">
             <div className="skeleton-title" />
