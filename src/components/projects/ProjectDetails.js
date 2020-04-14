@@ -3,6 +3,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { connect } from "react-redux";
 import { getProject } from "../../redux/actions/dataAction";
+import ProjectSkeleton from "../../util/ProjectSkeleton";
 
 class ProjectDetails extends Component {
   componentDidMount() {
@@ -28,9 +29,7 @@ class ProjectDetails extends Component {
         </div>
       </div>
     ) : (
-      <div className="container center">
-        <p>Loading data....</p>
-      </div>
+      <ProjectSkeleton />
     );
     return projectMarkup;
   }

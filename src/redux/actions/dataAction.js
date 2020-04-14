@@ -73,7 +73,7 @@ export const getUserData = userHandle => dispatch => {
     .then(res => {
       dispatch({
         type: SET_PROJECTS,
-        payload: res.data.screams
+        payload: res.data.projects
       });
     })
     .catch(() => {

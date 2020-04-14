@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Notifications from "./Notifications";
 import ProjectList from "../projects/ProjectList";
-import { getProjects, getNotifications } from "../../redux/actions/dataAction";
+import Profile from "./Profile";
+import { getUserData } from "../../redux/actions/dataAction";
 
-class Dashboard extends Component {
+class UserDetails extends Component {
   componentDidMount() {
-    this.props.getProjects();
-    this.props.getNotifications();
+    this.props.getUserData(this.props.match.params.handle);
   }
+
   render() {
-    const { projects, loading, notifications } = this.props.data;
+    const { projects, loading } = this.props.data;
     return (
       <div className="dashboard container">
         <div className="row">
@@ -18,7 +18,7 @@ class Dashboard extends Component {
             <ProjectList projects={projects} loading={loading} />
           </div>
           <div className="col s12 m5 offset-m1">
-            <Notifications notifications={notifications} />
+            <Profile />
           </div>
         </div>
       </div>
@@ -30,12 +30,10 @@ const mapStateToProps = state => ({
   data: state.data
 });
 
-const mapActionsToProps = {
-  getProjects,
-  getNotifications
+const mapDispatch = {
+  getUserData
 };
-
 export default connect(
   mapStateToProps,
-  mapActionsToProps
-)(Dashboard);
+  mapDispatch
+)(UserDetails);

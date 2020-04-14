@@ -6,6 +6,7 @@ import Navbar from "./components/layout/Navbar";
 import Dashboard from "./components/dashboard/Dashboard";
 import ProjectDetails from "./components/projects/ProjectDetails";
 import CreateProject from "./components/projects/CreateProject";
+import UserDetails from "./components/user/UserDetails";
 import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
 import { logoutUser, getUserData } from "./redux/actions/userAction";
@@ -41,6 +42,7 @@ class App extends Component {
             <Navbar />
             <Switch>
               <Route path="/" component={Dashboard} exact />
+              <Route path="/users/:handle" component={UserDetails} />
               <PrivateRoute
                 path="/project/:projectId"
                 component={ProjectDetails}
