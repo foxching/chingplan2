@@ -68,3 +68,27 @@ textarea.materialize-textarea:focus:not([readonly]) {
   width: 150px;
   margin-bottom: 7px;
 }
+.image-wrapper {
+  text-align: center;
+  position: relative;
+}
+.image-wrapper .button {
+  position: absolute;
+  top: 80%;
+  left: 70%;
+}
+.profile-image {
+  width: 150px;
+  height: 150px;
+}
+.line-separator {
+  border: none;
+  margin: 0 0 10px 0;
+}
+.profile-details {
+  text-align: center;
+  font-size: 15px;
+}
+.profile-details span {
+  vertical-align: middle;
+}

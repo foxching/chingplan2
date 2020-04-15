@@ -11,7 +11,11 @@ const ProjectList = ({ projects, loading }) => {
     <ProjectsSkeleton />
   );
 
-  return projectMarkup;
+  return (
+    <React.Fragment>
+      <div className="project-list section">{projectMarkup}</div>
+    </React.Fragment>
+  );
 };
 
 export default ProjectList;
