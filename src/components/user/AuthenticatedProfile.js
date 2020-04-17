@@ -2,16 +2,16 @@ import React, { Component } from "react";
 import dayjs from "dayjs";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import NoImg from "../../images/no-img.png";
 import EditDetails from "./EditDetails";
 import ProfileSkeleton from "../../util/ProfileSkeleton";
+import { uploadImage } from "../../redux/actions/userAction";
 
 class AuthenticatedProfile extends Component {
   handleImageChange = event => {
     const image = event.target.files[0];
     const formData = new FormData();
     formData.append("image", image, image.name);
-    //this.props.uploadImage(formData);
+    this.props.uploadImage(formData);
   };
 
   handleEditPicture = () => {
@@ -22,7 +22,7 @@ class AuthenticatedProfile extends Component {
   render() {
     const {
       user: {
-        credentials: { handle, createdAt, bio, website, location },
+        credentials: { handle, imageUrl, createdAt, bio, website, location },
         loading,
         authenticated
       }
@@ -37,7 +37,7 @@ class AuthenticatedProfile extends Component {
                   <div className="image-wrapper">
                     <img
                       className="responsive-img circle profile-image"
-                      src={NoImg}
+                      src={imageUrl}
                       alt="profile-img"
                     />
 
@@ -104,4 +104,11 @@ const mapStateToProps = state => ({
   user: state.user
 });
 
-export default connect(mapStateToProps)(AuthenticatedProfile);
+const mapDispatch = {
+  uploadImage
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatch
+)(AuthenticatedProfile);

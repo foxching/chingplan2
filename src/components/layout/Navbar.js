@@ -5,8 +5,15 @@ import SignedInLinks from "./SignedInLinks";
 import SignedOutLinks from "./SignedOutLinks";
 
 const Navbar = props => {
-  const { authenticated } = props.user;
-  const links = authenticated ? <SignedInLinks /> : <SignedOutLinks />;
+  const {
+    authenticated,
+    credentials: { handle, imageUrl }
+  } = props.user;
+  const links = authenticated ? (
+    <SignedInLinks imageUrl={imageUrl} handle={handle} />
+  ) : (
+    <SignedOutLinks />
+  );
   return (
     <nav className="nav-wrapper grey darken-3">
       <div className="container">

@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { logoutUser } from "../../redux/actions/userAction";
+//import Noimg from "../../images/no-img.png";
 
 const SignedInLinks = props => {
   return (
@@ -15,8 +16,15 @@ const SignedInLinks = props => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="/" className="btn btn-floating pink lighten-1">
-          RL
+        <NavLink
+          to={`/users/${props.handle}`}
+          className="btn btn-floating pink lighten-1"
+        >
+          <img
+            className="responsive-img circle profile-image"
+            src={props.imageUrl}
+            alt="profile-img"
+          />
         </NavLink>
       </li>
     </ul>

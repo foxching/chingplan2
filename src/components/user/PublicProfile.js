@@ -1,11 +1,17 @@
 import React, { Component } from "react";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
-import NoImg from "../../images/no-img.png";
 
 class PublicProfile extends Component {
   render() {
-    const { handle, createdAt, bio, website, location } = this.props.profile;
+    const {
+      handle,
+      imageUrl,
+      createdAt,
+      bio,
+      website,
+      location
+    } = this.props.profile;
 
     return (
       <React.Fragment>
@@ -16,7 +22,7 @@ class PublicProfile extends Component {
                 <div className="image-wrapper">
                   <img
                     className="responsive-img circle profile-image"
-                    src={NoImg}
+                    src={imageUrl}
                     alt="profile-img"
                   />
                 </div>
