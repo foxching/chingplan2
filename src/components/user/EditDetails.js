@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import M from "materialize-css";
 import "materialize-css/dist/css/materialize.min.css";
 import { editUserDetails } from "../../redux/actions/userAction";
+import MyButton from "../../util/MyButton";
 
 class EditDetails extends Component {
   state = {
@@ -59,19 +60,19 @@ class EditDetails extends Component {
       website: this.state.website,
       location: this.state.location
     };
-    //console.log(userDetails);
     this.props.editUserDetails(userDetails);
   };
   render() {
     return (
       <React.Fragment>
         <div className="center-align">
-          <button
-            className="waves-light  waves-effect btn modal-trigger btn-flat button "
-            data-target="modal1"
+          <MyButton
+            tip="edit details"
+            btnClassName="waves-light waves-effect btn modal-trigger btn-flat button  "
+            target="modal1"
           >
             <i className="tiny material-icons">edit</i>
-          </button>
+          </MyButton>
         </div>
 
         <div

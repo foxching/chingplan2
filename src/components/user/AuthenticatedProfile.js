@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import EditDetails from "./EditDetails";
 import ProfileSkeleton from "../../util/ProfileSkeleton";
 import { uploadImage } from "../../redux/actions/userAction";
+import MyButton from "../../util/MyButton";
 
 class AuthenticatedProfile extends Component {
   handleImageChange = event => {
@@ -48,12 +49,13 @@ class AuthenticatedProfile extends Component {
                         hidden
                         onChange={this.handleImageChange}
                       />
-                      <button
+                      <MyButton
                         onClick={this.handleEditPicture}
-                        className="waves-effect waves-teal btn-flat button"
+                        btnClassName="waves-effect waves-teal btn-flat button"
+                        tip="edit picture"
                       >
-                        <i className="tiny material-icons">edit</i>
-                      </button>
+                        <i className="tiny material-icons">camera_alt</i>
+                      </MyButton>
                     </React.Fragment>
                   </div>
                   <hr />
