@@ -27,10 +27,7 @@ class UserDetails extends Component {
 
   render() {
     const { projects, loading } = this.props.data;
-    const handle = this.props.match.params.handle;
-    const userHandle = this.props.user.credentials.handle;
     const { profile } = this.state;
-    const { authenticated } = this.props.user;
 
     return (
       <div className="dashboard container">
@@ -39,15 +36,10 @@ class UserDetails extends Component {
             <ProjectList projects={projects} loading={loading} />
           </div>
           <div className="col s12 m5 offset-m1">
-            {profile === null && <ProfileSkeleton />}
-            {profile !== null && !authenticated && handle !== userHandle && (
+            {profile === null ? (
+              <ProfileSkeleton />
+            ) : (
               <PublicProfile profile={profile} />
-            )}
-            {profile !== null && authenticated && handle !== userHandle && (
-              <PublicProfile profile={profile} />
-            )}
-            {profile !== null && authenticated && handle === userHandle && (
-              <AuthenticatedProfile />
             )}
           </div>
         </div>

@@ -1,21 +1,27 @@
 import React, { Component } from "react";
-import { Provider } from "react-redux";
+import axios from "axios";
+import jwtDecode from "jwt-decode";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import store from "./redux/store";
-import Navbar from "./components/layout/Navbar";
+import { Provider } from "react-redux";
+
+//pages
 import Dashboard from "./components/dashboard/Dashboard";
 import ProjectDetails from "./components/projects/ProjectDetails";
 import CreateProject from "./components/projects/CreateProject";
 import UserDetails from "./components/user/UserDetails";
+import Settings from "./components/user/settings/Settings";
 import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
+
+//redux
+import store from "./redux/store";
 import { logoutUser, getUserData } from "./redux/actions/userAction";
 import { SET_AUTHENTICATED } from "./redux/types";
-import jwtDecode from "jwt-decode";
+
+//components
+import Navbar from "./components/layout/Navbar";
 import AuthRoute from "./util/AuthRoute";
 import PrivateRoute from "./util/PrivateRoute";
-
-import axios from "axios";
 
 axios.defaults.baseURL =
   "https://asia-east2-socialplan-aace6.cloudfunctions.net/api";
@@ -43,6 +49,7 @@ class App extends Component {
             <Switch>
               <Route path="/" component={Dashboard} exact />
               <Route path="/users/:handle" component={UserDetails} />
+              <PrivateRoute path="/settings" component={Settings} />
               <PrivateRoute
                 path="/project/:projectId"
                 component={ProjectDetails}

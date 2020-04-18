@@ -1,39 +1,27 @@
 import React from "react";
-import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { logoutUser } from "../../redux/actions/userAction";
-//import Noimg from "../../images/no-img.png";
+import Dropdown from "../../util/Dropdown";
 
 const SignedInLinks = props => {
   return (
     <ul className="right">
       <li>
-        <NavLink to="/create">New Project</NavLink>
+        <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <NavLink to="/signin" onClick={props.logoutUser}>
-          Logout
-        </NavLink>
+        <NavLink to="/create">Create</NavLink>
       </li>
       <li>
-        <NavLink
-          to={`/users/${props.handle}`}
-          className="btn btn-floating pink lighten-1"
-        >
+        <Dropdown btnClassName="btn btn-floating pink lighten-1">
           <img
             className="responsive-img circle profile-image"
             src={props.imageUrl}
             alt="profile-img"
           />
-        </NavLink>
+        </Dropdown>
       </li>
     </ul>
   );
 };
-const mapDispatch = {
-  logoutUser
-};
-export default connect(
-  null,
-  mapDispatch
-)(SignedInLinks);
+
+export default SignedInLinks;
