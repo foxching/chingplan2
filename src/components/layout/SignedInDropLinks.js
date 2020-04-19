@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import M from "materialize-css";
 import "materialize-css/dist/css/materialize.min.css";
 
-import { logoutUser } from "../redux/actions/userAction";
+import { logoutUser } from "../../redux/actions/userAction";
 
-class Dropdown extends Component {
+class SignedInDropLinks extends Component {
   componentDidMount() {
     const options = {
       // hover: true,
@@ -72,4 +72,4 @@ const mapDispatch = {
 export default connect(
   null,
   mapDispatch
-)(Dropdown);
+)(SignedInDropLinks);

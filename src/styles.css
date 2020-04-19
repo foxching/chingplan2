@@ -148,4 +148,16 @@ input[type="submit"] {
 /* Project List */
 .project-list {
   margin-bottom: 25px;
+  padding: 10px;
+}
+
+/* Project Summary */
+.project-summary {
+  position: relative;
+}
+
+.expand-button {
+  position: absolute;
+  top: 0;
+  left: 90%;
 }

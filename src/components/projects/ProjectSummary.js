@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-
+import ProjectOption from "./ProjectOption";
 const ProjectSummary = ({ project }) => {
   dayjs.extend(relativeTime);
   return (
@@ -21,6 +21,14 @@ const ProjectSummary = ({ project }) => {
           </Link>
         </p>
         <p className="grey-text">{dayjs(project.createdAt).fromNow()}</p>
+        <ProjectOption btnClassName="expand-button">
+          <i
+            class="material-icons tiny grey-text darken-4"
+            style={{ fontSize: "28px" }}
+          >
+            more_horiz
+          </i>
+        </ProjectOption>
       </div>
     </div>
   );

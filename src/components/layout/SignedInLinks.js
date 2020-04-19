@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import Dropdown from "../../util/Dropdown";
+import SignedInDropLinks from "./SignedInDropLinks.js";
 
 const SignedInLinks = props => {
   return (
@@ -12,8 +12,8 @@ const SignedInLinks = props => {
         <NavLink to="/create">Create</NavLink>
       </li>
       <li>
-        <Dropdown
-          btnClassName="btn btn-floating pink lighten-1"
+        <SignedInDropLinks
+          btnClassName="btn btn-floating white lighten-1"
           handle={props.handle}
         >
           <img
@@ -21,7 +21,7 @@ const SignedInLinks = props => {
             src={props.imageUrl}
             alt="profile-img"
           />
-        </Dropdown>
+        </SignedInDropLinks>
       </li>
     </ul>
   );
