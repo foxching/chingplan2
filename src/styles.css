@@ -72,15 +72,29 @@ Skeleton Style */
 }
 .handle-skeleton {
   background-color: black;
-  height: 15px;
-  width: 220px;
+  height: 20px;
+  width: 260px;
   margin-bottom: 7px;
   vertical-align: middle;
 }
+.handle-skeleton-2 {
+  background-color: lightblue;
+  height: 20px;
+  width: 400px;
+  margin-bottom: 7px;
+  float: center;
+}
 .bio-skeleton {
   background-color: lightgray;
-  height: 50px;
-  width: 220px;
+  height: 80px;
+  width: 260px;
+  margin-bottom: 7px;
+}
+
+.bio-skeleton-2 {
+  background-color: lightgray;
+  height: 80px;
+  width: 400px;
   margin-bottom: 7px;
 }
 
@@ -111,7 +125,7 @@ hr {
 }
 
 /* Modal Style */
-form {
+.modal-form {
   margin-top: 10px;
 }
 .modal {
@@ -131,6 +145,7 @@ input[type="submit"] {
   margin: 0;
 }
 
+/* Project List */
 .project-list {
   margin-bottom: 25px;
 }

@@ -3,7 +3,6 @@ import axios from "axios";
 import { connect } from "react-redux";
 import ProjectList from "../projects/ProjectList";
 import PublicProfile from "./PublicProfile";
-import AuthenticatedProfile from "../../components/user/AuthenticatedProfile";
 import ProfileSkeleton from "../../util/ProfileSkeleton";
 import { getUserData } from "../../redux/actions/dataAction";
 

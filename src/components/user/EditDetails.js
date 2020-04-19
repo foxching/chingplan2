@@ -85,7 +85,7 @@ class EditDetails extends Component {
           <h5 className="modal-close close-btn">&#10005;</h5>
           <div className="modal-content center">
             <h4>Edit Details</h4>
-            <form>
+            <form className="modal-form">
               <div className="input-field">
                 <textarea
                   id="bio"

@@ -12,7 +12,10 @@ const SignedInLinks = props => {
         <NavLink to="/create">Create</NavLink>
       </li>
       <li>
-        <Dropdown btnClassName="btn btn-floating pink lighten-1">
+        <Dropdown
+          btnClassName="btn btn-floating pink lighten-1"
+          handle={props.handle}
+        >
           <img
             className="responsive-img circle profile-image"
             src={props.imageUrl}

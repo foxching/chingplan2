@@ -42,7 +42,7 @@ class SignUp extends Component {
     return (
       <div className="container">
         <form
-          className="white"
+          className="white "
           onSubmit={this.onHandleSubmit}
           style={{ margin: 15 }}
         >

@@ -50,6 +50,9 @@ class Dropdown extends Component {
           <li>
             <Link to="/settings">Settings</Link>
           </li>
+          <li>
+            <Link to={`/users/${this.props.handle}`}>My Plans</Link>
+          </li>
           <li className="divider" tabindex="-1" />
           <li>
             <Link to="/signin" onClick={this.props.logoutUser}>

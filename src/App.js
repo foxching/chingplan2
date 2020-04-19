@@ -48,7 +48,7 @@ class App extends Component {
             <Navbar />
             <Switch>
               <Route path="/" component={Dashboard} exact />
-              <Route path="/users/:handle" component={UserDetails} />
+              <PrivateRoute path="/users/:handle" component={UserDetails} />
               <PrivateRoute path="/settings" component={Settings} />
               <PrivateRoute
                 path="/project/:projectId"

@@ -22,7 +22,7 @@ const Notifications = props => {
   );
 
   return (
-    <div className="section">
+    <div className="section" style={{ position: "fixed", width: "300px" }}>
       <div className="card z-depth-0">
         <div className="card-content">
           <span className="card-title">Notifications</span>

@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import EditDetails from "./EditDetails";
-import ProfileSkeleton from "../../util/ProfileSkeleton";
+import ProfileSkeleton2 from "../../util/ProfileSkeleton2";
 import { uploadImage } from "../../redux/actions/userAction";
 import MyButton from "../../util/MyButton";
 
@@ -32,7 +32,7 @@ class AuthenticatedProfile extends Component {
       !loading && authenticated ? (
         <React.Fragment>
           <div className="section">
-            <div className="card z-depth-0">
+            <div className="card card medium z-depth-0">
               <div className="card-content">
                 <div className="profile">
                   <div className="image-wrapper">
@@ -62,32 +62,46 @@ class AuthenticatedProfile extends Component {
                   <div className="profile-details">
                     <Link to={`/users/${handle}`}>@{handle}</Link>
                     <hr />
-                    {bio && <h6>{bio}</h6>}
+                    {bio && (
+                      <h6>
+                        Bio:
+                        <span className="grey-text">{bio}</span>
+                      </h6>
+                    )}
                     <hr />
                     {location && (
                       <React.Fragment>
-                        <i className="tiny material-icons">location_on</i>
-                        <span>{location}</span>
+                        <h6>
+                          Location:
+                          <span className="grey-text">{location}</span>
+                        </h6>
                         <hr />
                       </React.Fragment>
                     )}
                     {website && (
                       <React.Fragment>
-                        <i className="tiny material-icons">insert_link</i>
-                        <a
-                          href={website}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {website}
-                        </a>
+                        <h6>
+                          Website:
+                          <a
+                            href={website}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {website}
+                          </a>
+                        </h6>
+
                         <hr />
                       </React.Fragment>
                     )}
 
                     <React.Fragment>
-                      <i className="tiny material-icons">today</i>
-                      <span>Joined {dayjs(createdAt).format("MMM YYYY")}</span>
+                      <h6>
+                        Member Sinced:
+                        <span className="grey-text">
+                          {dayjs(createdAt).format("MMM YYYY")}
+                        </span>
+                      </h6>
                     </React.Fragment>
                   </div>
                   <EditDetails />
@@ -97,7 +111,7 @@ class AuthenticatedProfile extends Component {
           </div>
         </React.Fragment>
       ) : (
-        <ProfileSkeleton />
+        <ProfileSkeleton2 />
       );
     return profileMarkup;
   }
