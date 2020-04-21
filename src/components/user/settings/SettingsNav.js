@@ -6,7 +6,7 @@ class SettingsNav extends Component {
     return (
       <div className="section">
         <ul className="collection with-header">
-          <li class="collection-header grey darken-2 white-text">
+          <li className="collection-header grey darken-2 white-text">
             <i className="material-icons tiny">person</i>
             <span>Profile</span>
           </li>
@@ -22,7 +22,7 @@ class SettingsNav extends Component {
           </li>
         </ul>
         <ul className="collection with-header">
-          <li class="collection-header grey darken-2 white-text">
+          <li className="collection-header grey darken-2 white-text">
             <i className="material-icons tiny">settings</i>
             <span>Account</span>
           </li>

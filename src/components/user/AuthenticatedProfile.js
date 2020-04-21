@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import dayjs from "dayjs";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import EditDetails from "./EditDetails";
+import EditProfile from "./EditProfile";
 import ProfileSkeleton2 from "../../util/ProfileSkeleton2";
 import { uploadImage } from "../../redux/actions/userAction";
 import MyButton from "../../util/MyButton";
@@ -104,7 +104,7 @@ class AuthenticatedProfile extends Component {
                       </h6>
                     </React.Fragment>
                   </div>
-                  <EditDetails />
+                  <EditProfile />
                 </div>
               </div>
             </div>

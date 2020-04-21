@@ -48,14 +48,22 @@ class SignedInDropLinks extends Component {
 
         <ul id="dropdown1" className="dropdown-content">
           <li>
-            <Link to="/settings">Settings</Link>
+            <Link to="/settings" className="black-text">
+              Settings
+            </Link>
           </li>
           <li>
-            <Link to={`/users/${this.props.handle}`}>My Plans</Link>
+            <Link to={`/users/${this.props.handle}`} className="black-text">
+              My Plans
+            </Link>
           </li>
-          <li className="divider" tabindex="-1" />
+          <li className="divider" />
           <li>
-            <Link to="/signin" onClick={this.props.logoutUser}>
+            <Link
+              to="/signin"
+              onClick={this.props.logoutUser}
+              className="black-text"
+            >
               Signout
             </Link>
           </li>

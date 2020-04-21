@@ -5,7 +5,7 @@ import "materialize-css/dist/css/materialize.min.css";
 import { editUserDetails } from "../../redux/actions/userAction";
 import MyButton from "../../util/MyButton";
 
-class EditDetails extends Component {
+class EditProfile extends Component {
   state = {
     bio: "",
     website: "",
@@ -152,4 +152,4 @@ const mapDispatch = {
 export default connect(
   mapStateToProps,
   mapDispatch
-)(EditDetails);
+)(EditProfile);

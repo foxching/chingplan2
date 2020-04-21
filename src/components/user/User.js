@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import ProjectList from "../projects/ProjectList";
-import PublicProfile from "./PublicProfile";
+import StaticProfile from "./StaticProfile";
 import ProfileSkeleton from "../../util/ProfileSkeleton";
 import { getUserData } from "../../redux/actions/dataAction";
 
@@ -38,7 +38,7 @@ class UserDetails extends Component {
             {profile === null ? (
               <ProfileSkeleton />
             ) : (
-              <PublicProfile profile={profile} />
+              <StaticProfile profile={profile} />
             )}
           </div>
         </div>
