@@ -21,7 +21,7 @@ const ProjectSummary = ({ project }) => {
           </Link>
         </p>
         <p className="grey-text">{dayjs(project.createdAt).fromNow()}</p>
-        <ProjectOption projectId={project.projectId} />
+        <ProjectOption projectId={project.projectId} project={project} />
       </div>
     </div>
   );

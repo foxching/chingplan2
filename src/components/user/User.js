@@ -48,8 +48,7 @@ class UserDetails extends Component {
 }
 
 const mapStateToProps = state => ({
-  data: state.data,
-  user: state.user
+  data: state.data
 });
 
 const mapDispatch = {

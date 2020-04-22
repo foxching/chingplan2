@@ -8,6 +8,13 @@ class EditProject extends Component {
     content: ""
   };
 
+  mapPropstoState = () => {
+    this.setState({
+      title: this.props.project.title ? this.props.project.title : "",
+      content: this.props.project.content ? this.props.project.content : ""
+    });
+  };
+
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
@@ -18,6 +25,7 @@ class EditProject extends Component {
     const options = {
       onOpenStart: () => {
         console.log("Open Start");
+        this.mapPropstoState();
       },
       onOpenEnd: () => {
         console.log("Open End");
@@ -70,7 +78,7 @@ class EditProject extends Component {
                   placeholder="Title"
                   value={this.state.title}
                 />
-                <label className="active" htmlFor="website">
+                <label className="active" htmlFor="title">
                   Title
                 </label>
               </div>
@@ -83,7 +91,7 @@ class EditProject extends Component {
                   value={this.state.content}
                   placeholder="Content"
                 />
-                <label className="active" htmlFor="bio">
+                <label className="active" htmlFor="content">
                   Content
                 </label>
               </div>

@@ -2,6 +2,7 @@ import {
   SET_PROJECTS,
   SET_PROJECT,
   POST_PROJECT,
+  DELETE_PROJECT,
   SET_NOTIFICATIONS,
   LOADING_DATA,
   SET_ERRORS,
@@ -64,6 +65,16 @@ export const postProject = (newProject, history) => dispatch => {
         payload: err.response.data
       });
     });
+};
+
+//delete a project
+export const deleteProject = projectId => dispatch => {
+  axios
+    .delete(`/project/${projectId}`)
+    .then(() => {
+      dispatch({ type: DELETE_PROJECT, payload: projectId });
+    })
+    .catch(err => console.log(err));
 };
 
 export const getUserData = userHandle => dispatch => {

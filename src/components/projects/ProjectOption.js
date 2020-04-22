@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-//import { connect } from "react-redux";
+import { connect } from "react-redux";
 //import { Link } from "react-router-dom";
 import M from "materialize-css";
 import "materialize-css/dist/css/materialize.min.css";
@@ -8,6 +8,9 @@ import DeleteProject from "./DeleteProject";
 import ProjectInfo from "./ProjectInfo";
 
 class ProjectOption extends Component {
+  state = {
+    open: false
+  };
   componentDidMount() {
     const options1 = {
       alignment: "left",
@@ -30,8 +33,15 @@ class ProjectOption extends Component {
     M.Dropdown.init(this.Dropdown, options1);
   }
 
+  handleOpenDropDown = () => {
+    this.setState({
+      open: true
+    });
+  };
+
   render() {
-    const { projectId } = this.props;
+    const { projectId, project, user } = this.props;
+
     return (
       <React.Fragment>
         <div className="expand-button">
@@ -42,40 +52,61 @@ class ProjectOption extends Component {
             className=" dropdown-trigger btn-flat "
             href="!#"
             data-target={`${projectId}`}
+            onClick={this.handleOpenDropDown}
           >
             <i className="material-icons">more_horiz</i>
           </a>
 
           <ul id={`${projectId}`} className="dropdown-content">
-            <button
-              className="waves-effect waves-light btn-flat modal-trigger"
-              data-target={`modal${projectId}`}
-            >
-              <i className="material-icons ">edit</i>
-              <span>Edit</span>
-            </button>
-            <button
-              className="waves-effect waves-light btn-flat modal-trigger"
-              data-target={`modal2${projectId}`}
-            >
-              <i className="material-icons ">delete</i>
-              <span>Delete</span>
-            </button>
-            <button
-              className="waves-effect waves-light btn-flat modal-trigger"
-              data-target={`modal3${projectId}`}
-            >
-              <i className="material-icons ">info</i>
-              <span>Info</span>
-            </button>
+            {user.authenticated &&
+            project.handle === user.credentials.handle ? (
+              <React.Fragment>
+                <li>
+                  <button
+                    className="waves-effect waves-light btn-flat modal-trigger"
+                    data-target={`modal${projectId}`}
+                  >
+                    <i className="material-icons ">edit</i>
+                    <span>Edit</span>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="waves-effect waves-light btn-flat modal-trigger"
+                    data-target={`modal2${projectId}`}
+                  >
+                    <i className="material-icons ">delete</i>
+                    <span>Delete</span>
+                  </button>
+                </li>
+              </React.Fragment>
+            ) : (
+              <li>
+                <button
+                  className="waves-effect waves-light btn-flat modal-trigger"
+                  data-target={`modal3${projectId}`}
+                >
+                  <i className="material-icons ">info</i>
+                  <span>Info</span>
+                </button>
+              </li>
+            )}
           </ul>
         </div>
-        <EditProject id={`modal${projectId}`} />
-        <DeleteProject id={`modal2${projectId}`} />
-        <ProjectInfo id={`modal3${projectId}`} />
+        {this.state.open && (
+          <React.Fragment>
+            {" "}
+            <EditProject id={`modal${projectId}`} project={project} />
+            <DeleteProject id={`modal2${projectId}`} />
+            <ProjectInfo id={`modal3${projectId}`} />
+          </React.Fragment>
+        )}
       </React.Fragment>
     );
   }
 }
 
-export default ProjectOption;
+const mapStateToProps = state => ({
+  user: state.user
+});
+export default connect(mapStateToProps)(ProjectOption);

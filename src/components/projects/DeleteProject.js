@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import M from "materialize-css";
 import "materialize-css/dist/css/materialize.min.css";
+import { deleteProject } from "../../redux/actions/dataAction";
 
 class DeleteProject extends Component {
   componentDidMount() {
@@ -27,6 +29,11 @@ class DeleteProject extends Component {
     M.Modal.init(this.Modal, options);
   }
 
+  handleDeleteProject = () => {
+    const id = this.props.id.split("modal2")[1];
+    this.props.deleteProject(id);
+  };
+
   render() {
     const { id } = this.props;
     return (
@@ -45,7 +52,10 @@ class DeleteProject extends Component {
             <button className="modal-close waves-effect waves-red btn-flat">
               Disagree
             </button>
-            <button className="modal-close waves-effect waves-green btn-flat">
+            <button
+              onClick={this.handleDeleteProject}
+              className="modal-close waves-effect waves-green btn-flat"
+            >
               Agree
             </button>
           </div>
@@ -55,4 +65,10 @@ class DeleteProject extends Component {
   }
 }
 
-export default DeleteProject;
+const mapDispatch = {
+  deleteProject
+};
+export default connect(
+  null,
+  mapDispatch
+)(DeleteProject);
