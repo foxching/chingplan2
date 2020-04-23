@@ -39,11 +39,23 @@ Skeleton Style */
   margin-bottom: 7px;
   width: 280px;
 }
+.skeleton-title2 {
+  background-color: black;
+  height: 30px;
+  margin-bottom: 7px;
+  width: 560px;
+}
 .skeleton-content {
   background-color: lightgray;
   height: 60px;
   margin-bottom: 7px;
   width: 400px;
+}
+.skeleton-content2 {
+  background-color: lightgray;
+  height: 150px;
+  margin-bottom: 7px;
+  width: 850px;
 }
 .skeleton-handle {
   background-color: lightgray;
@@ -51,12 +63,24 @@ Skeleton Style */
   margin-bottom: 7px;
   width: 220px;
 }
+.skeleton-handle2 {
+  background-color: lightgray;
+  height: 25px;
+  margin-bottom: 7px;
+  width: 400px;
+}
 
 .skeleton-date {
   background-color: lightgray;
   height: 30px;
   margin-bottom: 7px;
   width: 200px;
+}
+.skeleton-date2 {
+  background-color: lightgray;
+  height: 25px;
+  margin-bottom: 7px;
+  width: 400px;
 }
 .skeleton-notif-content {
   background-color: lightgray;

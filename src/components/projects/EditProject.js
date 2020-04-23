@@ -50,7 +50,7 @@ class EditProject extends Component {
     e.preventDefault();
     const userDetails = {
       title: this.state.title,
-      content: this.state.website
+      content: this.state.content
     };
     console.log(userDetails);
   };
@@ -89,6 +89,7 @@ class EditProject extends Component {
                   className="materialize-textarea"
                   onChange={this.handleChange}
                   value={this.state.content}
+                  data-length="200"
                   placeholder="Content"
                 />
                 <label className="active" htmlFor="content">
@@ -98,7 +99,10 @@ class EditProject extends Component {
             </form>
           </div>
           <div className="modal-footer">
-            <button className="modal-close waves-effect waves-green btn-flat">
+            <button
+              onClick={this.handleSubmit}
+              className="modal-close waves-effect waves-green btn-flat"
+            >
               Agree
             </button>
           </div>
