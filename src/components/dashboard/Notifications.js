@@ -8,6 +8,7 @@ const Notifications = props => {
   dayjs.extend(relativeTime);
 
   let notificationMarkup = !loading ? (
+    notifications &&
     notifications.map(notification => (
       <li key={notification.notificationId}>
         <span className="pink-text">{notification.handle} </span>

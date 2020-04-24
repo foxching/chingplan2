@@ -3,6 +3,7 @@ import {
   SET_PROJECT,
   POST_PROJECT,
   DELETE_PROJECT,
+  EDIT_PROJECT,
   SET_NOTIFICATIONS,
   LOADING_DATA,
   SET_ERRORS,
@@ -75,6 +76,20 @@ export const deleteProject = projectId => dispatch => {
       dispatch({ type: DELETE_PROJECT, payload: projectId });
     })
     .catch(err => console.log(err));
+};
+
+//edit project
+export const editProject = (projectId, updatedProject) => dispatch => {
+  axios
+    .post(`/project/${projectId}`, updatedProject)
+    .then(() => {
+      dispatch({
+        type: EDIT_PROJECT,
+        payload: projectId,
+        payload2: updatedProject
+      });
+    })
+    .catch(err => console.log(err.response.data));
 };
 
 export const getUserData = userHandle => dispatch => {

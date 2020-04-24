@@ -4,6 +4,7 @@ import ProjectsSkeleton from "../../util/ProjectsSkeleton";
 
 const ProjectList = ({ projects, loading }) => {
   let projectMarkup = !loading ? (
+    projects &&
     projects.map(project => (
       <ProjectSummary key={project.projectId} project={project} />
     ))

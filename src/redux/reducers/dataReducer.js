@@ -3,6 +3,7 @@ import {
   SET_PROJECT,
   POST_PROJECT,
   DELETE_PROJECT,
+  EDIT_PROJECT,
   SET_NOTIFICATIONS,
   LOADING_DATA
 } from "../types";
@@ -39,6 +40,20 @@ export default function(state = initialState, action) {
         projects: state.projects.filter(
           project => project.projectId !== action.payload
         )
+      };
+    case EDIT_PROJECT:
+      return {
+        ...state,
+        projects: state.projects.map(project => {
+          if (project.projectId === action.payload) {
+            return {
+              ...project,
+              ...action.payload2
+            };
+          } else {
+            return project;
+          }
+        })
       };
     case POST_PROJECT:
       return {

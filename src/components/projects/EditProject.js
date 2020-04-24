@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import M from "materialize-css";
 import "materialize-css/dist/css/materialize.min.css";
+import { editProject } from "../../redux/actions/dataAction";
 
 class EditProject extends Component {
   state = {
@@ -48,11 +50,12 @@ class EditProject extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    const id = this.props.id.split("modal")[1];
     const userDetails = {
       title: this.state.title,
       content: this.state.content
     };
-    console.log(userDetails);
+    this.props.editProject(id, userDetails);
   };
   render() {
     const { id } = this.props;
@@ -112,4 +115,10 @@ class EditProject extends Component {
   }
 }
 
-export default EditProject;
+const mapDispatch = {
+  editProject
+};
+export default connect(
+  null,
+  mapDispatch
+)(EditProject);
