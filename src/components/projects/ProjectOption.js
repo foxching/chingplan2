@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-//import { Link } from "react-router-dom";
 import M from "materialize-css";
 import "materialize-css/dist/css/materialize.min.css";
 import EditProject from "../../components/projects/EditProject";
@@ -98,7 +97,7 @@ class ProjectOption extends Component {
             {" "}
             <EditProject id={`modal${projectId}`} project={project} />
             <DeleteProject id={`modal2${projectId}`} />
-            <ProjectInfo id={`modal3${projectId}`} />
+            <ProjectInfo id={`modal3${projectId}`} project={project} />
           </React.Fragment>
         )}
       </React.Fragment>

@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 import M from "materialize-css";
 import "materialize-css/dist/css/materialize.min.css";
 
@@ -28,7 +30,8 @@ class ProjectInfo extends Component {
   }
 
   render() {
-    const { id } = this.props;
+    const { id, project } = this.props;
+    dayjs.extend(relativeTime);
     return (
       <div>
         <div
@@ -40,22 +43,27 @@ class ProjectInfo extends Component {
         >
           <div className="modal-content">
             <h4>Project Info </h4>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum
+            <p className="grey-text">
+              Posted by:<span>{project.handle}</span>
             </p>
+            <p className="grey-text">
+              Posted :
+              <span>
+                {dayjs(project.createdAt).format("ddd, MMM D, YYYY h:mm A")}
+              </span>
+            </p>
+            {project.updatedAt && (
+              <p className="grey-text">
+                Updated :
+                <span>
+                  {dayjs(project.updatedAt).format("ddd, MMM D, YYYY h:mm A")}
+                </span>
+              </p>
+            )}
           </div>
           <div className="modal-footer">
-            <button className="modal-close waves-effect waves-red btn-flat">
-              Disagree
-            </button>
             <button className="modal-close waves-effect waves-green btn-flat">
-              Agree
+              OK
             </button>
           </div>
         </div>
