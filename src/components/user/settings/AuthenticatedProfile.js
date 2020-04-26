@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import dayjs from "dayjs";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import EditProfile from "./EditProfile";
-import ProfileSkeleton2 from "../../util/ProfileSkeleton2";
-import { uploadImage } from "../../redux/actions/userAction";
-import MyButton from "../../util/MyButton";
+import EditProfile from "../EditProfile";
+import ProfileSkeleton2 from "../../../util/ProfileSkeleton2";
+import { uploadImage } from "../../../redux/actions/userAction";
+import MyButton from "../../../util/MyButton";
 
 class AuthenticatedProfile extends Component {
   handleImageChange = event => {

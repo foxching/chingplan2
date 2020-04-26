@@ -40,7 +40,11 @@ class CreateProject extends Component {
     const { errors } = this.state;
     return (
       <div className="container">
-        <form className="white" onSubmit={this.onHandleSubmit}>
+        <form
+          className="white"
+          style={{ padding: "20px" }}
+          onSubmit={this.onHandleSubmit}
+        >
           <h5 className="grey-text text-darken-3">Create New Project</h5>
           <div className="input-field">
             <input id="title" type="text" onChange={this.onHandleChange} />

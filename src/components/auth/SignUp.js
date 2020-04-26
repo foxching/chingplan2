@@ -42,9 +42,9 @@ class SignUp extends Component {
     return (
       <div className="container">
         <form
-          className="white "
+          className="white"
           onSubmit={this.onHandleSubmit}
-          style={{ margin: 15 }}
+          style={{ padding: "20px" }}
         >
           <h5 className="grey-text text-darken-3">Sign Up</h5>
           <div className="input-field">

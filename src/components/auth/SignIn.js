@@ -35,7 +35,11 @@ class SignIn extends Component {
     const { loading } = this.props.UI;
     return (
       <div className="container">
-        <form className="white" onSubmit={this.onHandleSubmit}>
+        <form
+          className="white"
+          style={{ padding: "20px" }}
+          onSubmit={this.onHandleSubmit}
+        >
           <h5 className="grey-text text-darken-3">Sign In</h5>
           <div className="input-field">
             <input id="email" type="text" onChange={this.onHandleChange} />

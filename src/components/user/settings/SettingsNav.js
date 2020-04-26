@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-//import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 class SettingsNav extends Component {
   render() {
@@ -11,14 +11,14 @@ class SettingsNav extends Component {
             <span>Profile</span>
           </li>
           <li>
-            <a href="#!" className="collection-item ">
-              Basics
-            </a>
+            <NavLink to="/settings/basic" className="collection-item">
+              Basic
+            </NavLink>
           </li>
           <li>
-            <a href="#!" className="collection-item ">
-              My Photo
-            </a>
+            <NavLink to="/settings/photos" className="collection-item">
+              Photos
+            </NavLink>
           </li>
         </ul>
         <ul className="collection with-header">
@@ -27,9 +27,9 @@ class SettingsNav extends Component {
             <span>Account</span>
           </li>
           <li>
-            <a href="#!" className="collection-item ">
-              Security
-            </a>
+            <NavLink to="/settings/password" className="collection-item">
+              Password
+            </NavLink>
           </li>
         </ul>
       </div>
