@@ -21,7 +21,7 @@ class PublicProfile extends Component {
               <div className="profile">
                 <div className="image-wrapper">
                   <img
-                    className="responsive-img circle profile-image"
+                    className="responsive-img circle profile-image-two"
                     src={imageUrl}
                     alt="profile-img"
                   />

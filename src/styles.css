@@ -131,9 +131,13 @@ Skeleton Style */
   top: 80%;
   left: 70%;
 }
-.profile-image {
+.profile-image-two {
   width: 150px;
   height: 150px;
+}
+.profile-image-one {
+  width: 300px;
+  height: 300px;
 }
 hr {
   border: none;
@@ -183,4 +187,9 @@ input[type="submit"] {
   position: absolute;
   top: 0;
   left: 90%;
+}
+
+.collection .collection-item.active {
+  background-color: black;
+  color: #ffffff;
 }

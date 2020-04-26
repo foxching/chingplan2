@@ -11,12 +11,15 @@ class SettingsNav extends Component {
             <span>Profile</span>
           </li>
           <li>
-            <NavLink to="/settings/basic" className="collection-item">
+            <NavLink to="/settings/basic" className="collection-item grey-text">
               Basic
             </NavLink>
           </li>
           <li>
-            <NavLink to="/settings/photos" className="collection-item">
+            <NavLink
+              to="/settings/photos"
+              className="collection-item grey-text"
+            >
               Photos
             </NavLink>
           </li>
@@ -27,7 +30,10 @@ class SettingsNav extends Component {
             <span>Account</span>
           </li>
           <li>
-            <NavLink to="/settings/password" className="collection-item">
+            <NavLink
+              to="/settings/password"
+              className="collection-item grey-text"
+            >
               Password
             </NavLink>
           </li>

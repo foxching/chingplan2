@@ -92,7 +92,7 @@ class EditProject extends Component {
                   className="materialize-textarea"
                   onChange={this.handleChange}
                   value={this.state.content}
-                  data-length="200"
+                  data-length={200}
                   placeholder="Content"
                 />
                 <label className="active" htmlFor="content">
