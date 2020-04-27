@@ -4,9 +4,11 @@ import {
   CLEAR_ERRORS,
   LOADING_UI,
   SET_UNAUTHENTICATED,
-  LOADING_USER
+  LOADING_USER,
+  STOP_LOADING_USER
 } from "../types";
 import axios from "axios";
+import { toastr } from "react-redux-toastr";
 
 export const loginUser = (userData, history) => dispatch => {
   dispatch({ type: LOADING_UI });
@@ -82,6 +84,28 @@ export const editUserDetails = userDetails => dispatch => {
       dispatch(getUserData());
     })
     .catch(err => console.log(err));
+};
+
+export const updatePassword = password => dispatch => {
+  dispatch({ type: LOADING_USER });
+  axios
+    .post("/user/password", password)
+    .then(() => {
+      dispatch({ type: CLEAR_ERRORS });
+      toastr.success("Success", "Password has been updated!");
+      dispatch({ type: STOP_LOADING_USER });
+    })
+    .catch(err => {
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data
+      });
+      dispatch({ type: STOP_LOADING_USER });
+    });
+};
+
+export const clearErrors = () => dispatch => {
+  dispatch({ type: CLEAR_ERRORS });
 };
 
 const setAuthorizationHeader = token => {

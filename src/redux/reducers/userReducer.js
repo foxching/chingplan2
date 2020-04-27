@@ -2,7 +2,8 @@ import {
   SET_USER,
   SET_AUTHENTICATED,
   SET_UNAUTHENTICATED,
-  LOADING_USER
+  LOADING_USER,
+  STOP_LOADING_USER
 } from "../types";
 
 const initialState = {
@@ -30,6 +31,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         loading: true
+      };
+    case STOP_LOADING_USER:
+      return {
+        ...state,
+        loading: false
       };
     default:
       return state;

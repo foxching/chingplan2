@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { postProject } from "../../redux/actions/dataAction";
-
+import { clearErrors } from "../../redux/actions/userAction";
 class CreateProject extends Component {
   state = {
     title: "",
@@ -18,6 +18,10 @@ class CreateProject extends Component {
     if (!nextProps.UI.errors && !nextProps.UI.loading) {
       this.setState({ title: "", content: "", errors: {} });
     }
+  }
+
+  componentWillUnmount() {
+    this.props.clearErrors();
   }
 
   onHandleChange = e => {
@@ -90,7 +94,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatch = {
-  postProject
+  postProject,
+  clearErrors
 };
 
 export default connect(

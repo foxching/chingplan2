@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { toastr } from "react-redux-toastr";
 import M from "materialize-css";
 import "materialize-css/dist/css/materialize.min.css";
 import { editUserDetails } from "../../redux/actions/userAction";
@@ -53,14 +54,20 @@ class EditProfile extends Component {
     this.mapUserDetailsToState(credentials);
   }
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
     const userDetails = {
       bio: this.state.bio,
       website: this.state.website,
       location: this.state.location
     };
-    this.props.editUserDetails(userDetails);
+
+    try {
+      await this.props.editUserDetails(userDetails);
+      toastr.success("Success", "Details has been updated!");
+    } catch (err) {
+      toastr.error("Error", "There is something wrong!");
+    }
   };
   render() {
     return (

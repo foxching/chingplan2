@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 // Redux stuff
 import { connect } from "react-redux";
-import { signupUser } from "../../redux/actions/userAction";
+import { signupUser, clearErrors } from "../../redux/actions/userAction";
 
 class SignUp extends Component {
   state = {
@@ -17,6 +17,10 @@ class SignUp extends Component {
     if (nextProps.UI.errors) {
       this.setState({ errors: nextProps.UI.errors });
     }
+  }
+
+  componentWillUnmount() {
+    this.props.clearErrors();
   }
 
   onHandleChange = e => {
@@ -133,7 +137,12 @@ const mapStateToProps = state => ({
   UI: state.UI
 });
 
+const mapDispatch = {
+  signupUser,
+  clearErrors
+};
+
 export default connect(
   mapStateToProps,
-  { signupUser }
+  mapDispatch
 )(SignUp);

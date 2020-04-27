@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-
 import { connect } from "react-redux";
-import { loginUser } from "../../redux/actions/userAction";
+import { loginUser, clearErrors } from "../../redux/actions/userAction";
 
 class SignIn extends Component {
   state = {
@@ -14,6 +13,10 @@ class SignIn extends Component {
     if (nextProps.UI.errors) {
       this.setState({ errors: nextProps.UI.errors });
     }
+  }
+
+  componentWillUnmount() {
+    this.props.clearErrors();
   }
 
   onHandleChange = e => {
@@ -96,7 +99,8 @@ const mapStateToProps = state => ({
 });
 
 const mapActionsToProps = {
-  loginUser
+  loginUser,
+  clearErrors
 };
 
 export default connect(
