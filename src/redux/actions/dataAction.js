@@ -11,6 +11,7 @@ import {
   LOADING_UI,
   STOP_LOADING_UI
 } from "../types";
+import { toastr } from "react-redux-toastr";
 import axios from "axios";
 
 // Get all screams
@@ -74,6 +75,7 @@ export const deleteProject = projectId => dispatch => {
     .delete(`/project/${projectId}`)
     .then(() => {
       dispatch({ type: DELETE_PROJECT, payload: projectId });
+      toastr.success("Success", "Project deleted!");
     })
     .catch(err => console.log(err));
 };
@@ -88,6 +90,7 @@ export const editProject = (projectId, updatedProject) => dispatch => {
         payload: projectId,
         payload2: updatedProject
       });
+      toastr.success("Success", "Project updated!");
     })
     .catch(err => console.log(err.response.data));
 };
