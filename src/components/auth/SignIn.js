@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import { loginUser, clearErrors } from "../../redux/actions/userAction";
 
@@ -38,6 +39,10 @@ class SignIn extends Component {
     const { loading } = this.props.UI;
     return (
       <div className="container">
+        <Helmet>
+          <title>SignIn</title>
+          <meta name="description" content="Login" />
+        </Helmet>
         <form
           className="white"
           style={{ padding: "20px" }}

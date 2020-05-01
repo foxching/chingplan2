@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import { postProject } from "../../redux/actions/dataAction";
 import { clearErrors } from "../../redux/actions/userAction";
@@ -44,6 +45,10 @@ class CreateProject extends Component {
     const { errors } = this.state;
     return (
       <div className="container">
+        <Helmet>
+          <title>Create Project</title>
+          <meta name="description" content="Create Project" />
+        </Helmet>
         <form
           className="white"
           style={{ padding: "20px" }}

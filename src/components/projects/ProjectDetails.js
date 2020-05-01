@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Helmet } from "react-helmet";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { connect } from "react-redux";
@@ -17,6 +18,10 @@ class ProjectDetails extends Component {
 
     const projectMarkup = !loading ? (
       <div className="container section project-details">
+        <Helmet>
+          <title>{project.title}</title>
+          <meta name="description" content="Project Details" />
+        </Helmet>
         <div className="card z-depth-0 project-details">
           <div className="card-content">
             <span className="card-title">{project.title}</span>

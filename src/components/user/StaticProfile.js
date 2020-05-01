@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Helmet } from "react-helmet";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 
@@ -15,6 +16,10 @@ class PublicProfile extends Component {
 
     return (
       <React.Fragment>
+        <Helmet>
+          <title>@{handle}</title>
+          <meta name="description" content="User Projects" />
+        </Helmet>
         <div className="section">
           <div className="card z-depth-0">
             <div className="card-content">

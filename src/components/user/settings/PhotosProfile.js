@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import NoImg from "../../../images/no-img.png";
 import MyButton from "../../../util/MyButton";
@@ -26,6 +27,10 @@ class PhotosProfile extends Component {
     } = this.props;
     return (
       <div className="section">
+        <Helmet>
+          <title>Settings - Photos</title>
+          <meta name="description" content="Change Profile Picture" />
+        </Helmet>
         <div className="card card medium z-depth-0">
           <div className="card-content">
             <div className="image-wrapper">

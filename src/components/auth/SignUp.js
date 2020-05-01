@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Helmet } from "react-helmet";
 
 // Redux stuff
 import { connect } from "react-redux";
@@ -45,6 +46,10 @@ class SignUp extends Component {
     const { loading } = this.props.UI;
     return (
       <div className="container">
+        <Helmet>
+          <title>Signup</title>
+          <meta name="description" content="Register" />
+        </Helmet>
         <form
           className="white"
           onSubmit={this.onHandleSubmit}

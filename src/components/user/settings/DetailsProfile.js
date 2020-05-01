@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Helmet } from "react-helmet";
 import EditProfile from "../EditProfile";
 
 class AuthenticatedProfile extends Component {
@@ -10,6 +11,10 @@ class AuthenticatedProfile extends Component {
     } = this.props;
     return (
       <div className="section">
+        <Helmet>
+          <title>Settings - Basic</title>
+          <meta name="description" content="Change Profile Infos" />
+        </Helmet>
         <div className="card card medium z-depth-0">
           <div className="card-content">
             <div className="profile">

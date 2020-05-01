@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import { updatePassword } from "../../../redux/actions/userAction";
 import { clearErrors } from "../../../redux/actions/userAction";
@@ -44,6 +45,10 @@ class PaswordProfile extends Component {
     const { loading } = this.props.UI;
     return (
       <div className="section">
+        <Helmet>
+          <title>Settings - Password</title>
+          <meta name="description" content="Change Password" />
+        </Helmet>
         <div className="card card medium z-depth-0">
           <div className="card-content">
             <div className="profile">

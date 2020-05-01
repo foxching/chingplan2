@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import Notifications from "./Notifications";
 import ProjectList from "../projects/ProjectList";
@@ -13,6 +14,10 @@ class Dashboard extends Component {
     const { projects, loading, notifications } = this.props.data;
     return (
       <div className="dashboard container">
+        <Helmet>
+          <title>Home</title>
+          <meta name="description" content="Main" />
+        </Helmet>
         <div className="row">
           <div className="col s12 m6">
             <ProjectList projects={projects} loading={loading} />
