@@ -1,9 +1,11 @@
-import React, { Component } from "react";
+import React, { useRef, useEffect } from "react";
 import M from "materialize-css";
 import "materialize-css/dist/css/materialize.min.css";
 
-class MyButton extends Component {
-  componentDidMount() {
+const MyButton = props => {
+  const tip1 = useRef();
+
+  useEffect(() => {
     const options = {
       inDuration: 300,
       outDuration: 250,
@@ -13,27 +15,23 @@ class MyButton extends Component {
       position: "bottom",
       margin: 3
     };
-    M.Tooltip.init(this.Tooltip1, options);
-  }
+    M.Tooltip.init(tip1.current, options);
+  }, []);
 
-  render() {
-    return (
-      <div>
-        <button
-          ref={Tooltip => {
-            this.Tooltip1 = Tooltip;
-          }}
-          className={`tooltipped ${this.props.btnClassName}`}
-          onClick={this.props.onClick}
-          data-position="bottom"
-          data-tooltip={this.props.tip}
-          data-target={this.props.target}
-        >
-          {this.props.children}
-        </button>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <button
+        ref={tip1}
+        className={`tooltipped ${props.btnClassName}`}
+        onClick={props.onClick}
+        data-position="bottom"
+        data-tooltip={props.tip}
+        data-target={props.target}
+      >
+        {props.children}
+      </button>
+    </div>
+  );
+};
 
 export default MyButton;
