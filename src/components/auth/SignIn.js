@@ -1,114 +1,115 @@
-import React, { Component } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Helmet } from "react-helmet";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser, clearErrors } from "../../redux/actions/userAction";
 
-class SignIn extends Component {
-  state = {
-    email: "",
-    password: "",
-    errors: {}
+const Signin = props => {
+  //local statte
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
+
+  //redux state
+  const dispatch = useDispatch();
+  const loading = useSelector(state => state.UI.loading);
+  const err = useSelector(state => state.UI.errors);
+  //actions
+  const login = (data, history) => dispatch(loginUser(data, history));
+
+  //METHODS//
+  const handleChangeEmail = event => {
+    setEmail(event.target.value);
   };
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.UI.errors) {
-      this.setState({ errors: nextProps.UI.errors });
-    }
-  }
-
-  componentWillUnmount() {
-    this.props.clearErrors();
-  }
-
-  onHandleChange = e => {
-    this.setState({
-      [e.target.id]: e.target.value
-    });
+  const handleChangePassword = event => {
+    setPassword(event.target.value);
   };
 
-  onHandleSubmit = e => {
+  const onHandleSubmit = e => {
     e.preventDefault();
     const userData = {
-      email: this.state.email,
-      password: this.state.password
+      email: email,
+      password: password
     };
-    this.props.loginUser(userData, this.props.history);
+    login(userData, props.history);
   };
-  render() {
-    const { errors } = this.state;
-    const { loading } = this.props.UI;
-    return (
-      <div className="container">
-        <Helmet>
-          <title>SignIn</title>
-          <meta name="description" content="Login" />
-        </Helmet>
-        <form
-          className="white"
-          style={{ padding: "20px" }}
-          onSubmit={this.onHandleSubmit}
-        >
-          <h5 className="grey-text text-darken-3">Sign In</h5>
-          <div className="input-field">
-            <input id="email" type="text" onChange={this.onHandleChange} />
-            <label htmlFor="email">Email</label>
-            {errors.email && (
-              <span
-                className="helper-text red-text "
-                data-error="wrong"
-                data-success="right"
-              >
-                {errors.email}
-              </span>
-            )}
-          </div>
-          <div className="input-field">
-            <input
-              id="password"
-              type="password"
-              onChange={this.onHandleChange}
-            />
-            <label htmlFor="password">Password</label>
-            {errors.password && (
-              <span
-                className="helper-text red-text "
-                data-error="wrong"
-                data-success="right"
-              >
-                {errors.password}
-              </span>
-            )}
-          </div>
-          {errors.general && (
-            <>
-              <span className="red-text" style={{ marginTop: 5 }}>
-                {errors.general}
-              </span>
-              <br />
-            </>
+
+  //side effect
+  useEffect(() => {
+    setErrors(err);
+  }, [err]);
+
+  useEffect(() => {
+    const clearUIErrors = () => dispatch(clearErrors());
+    return () => {
+      clearUIErrors();
+    };
+  }, [dispatch]);
+
+  return (
+    <div className="container">
+      <Helmet>
+        <title>SignIn</title>
+        <meta name="description" content="Login" />
+      </Helmet>
+      <form
+        className="white"
+        style={{ padding: "20px" }}
+        onSubmit={onHandleSubmit}
+      >
+        <h5 className="grey-text text-darken-3">Sign In</h5>
+        <div className="input-field">
+          <input
+            id="email"
+            type="text"
+            onChange={handleChangeEmail}
+            vaue={email}
+          />
+          <label htmlFor="email">Email</label>
+          {errors !== null && errors.email && (
+            <span
+              className="helper-text red-text "
+              data-error="wrong"
+              data-success="right"
+            >
+              {errors.email}
+            </span>
           )}
+        </div>
+        <div className="input-field">
+          <input
+            id="password"
+            type="password"
+            onChange={handleChangePassword}
+            vaue={password}
+          />
+          <label htmlFor="password">Password</label>
+          {errors !== null && errors.password && (
+            <span
+              className="helper-text red-text "
+              data-error="wrong"
+              data-success="right"
+            >
+              {errors.password}
+            </span>
+          )}
+        </div>
+        {errors !== null && errors.general && (
+          <>
+            <span className="red-text" style={{ marginTop: 5 }}>
+              {errors.general}
+            </span>
+            <br />
+          </>
+        )}
 
-          <button className="btn pink lighten-1 z-index-0" disabled={loading}>
-            Login
-          </button>
-          <div className="container red-text center" />
-        </form>
-      </div>
-    );
-  }
-}
-
-const mapStateToProps = state => ({
-  user: state.user,
-  UI: state.UI
-});
-
-const mapActionsToProps = {
-  loginUser,
-  clearErrors
+        <button className="btn pink lighten-1 z-index-0" disabled={loading}>
+          Login
+        </button>
+        <div className="container red-text center" />
+      </form>
+    </div>
+  );
 };
 
-export default connect(
-  mapStateToProps,
-  mapActionsToProps
-)(SignIn);
+export default Signin;
