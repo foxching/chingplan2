@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
+//redux staff
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser, clearErrors } from "../../redux/actions/userAction";
 
@@ -10,10 +11,10 @@ const Signin = props => {
   const [errors, setErrors] = useState({});
 
   //redux state
-  const dispatch = useDispatch();
   const loading = useSelector(state => state.UI.loading);
   const err = useSelector(state => state.UI.errors);
   //actions
+  const dispatch = useDispatch();
   const login = (data, history) => dispatch(loginUser(data, history));
 
   //METHODS//

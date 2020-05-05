@@ -1,14 +1,15 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import SignedInLinks from "./SignedInLinks";
 import SignedOutLinks from "./SignedOutLinks";
 
-const Navbar = props => {
+const Navbar = () => {
   const {
     authenticated,
     credentials: { handle, imageUrl }
-  } = props.user;
+  } = useSelector(state => state.user);
+
   const links = authenticated ? (
     <SignedInLinks imageUrl={imageUrl} handle={handle} />
   ) : (
@@ -27,10 +28,5 @@ const Navbar = props => {
     </div>
   );
 };
-const mapStateToProps = state => ({
-  user: state.user
-});
-export default connect(
-  mapStateToProps,
-  null
-)(Navbar);
+
+export default Navbar;
