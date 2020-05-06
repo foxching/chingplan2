@@ -1,33 +1,44 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { useState, useEffect, useRef } from "react";
 import M from "materialize-css";
 import "materialize-css/dist/css/materialize.min.css";
+
+import { useDispatch } from "react-redux";
 import { editProject } from "../../redux/actions/dataAction";
 
-class EditProject extends Component {
-  state = {
-    title: "",
-    content: ""
-  };
+const EditProject = props => {
+  const [value, setValue] = useState({ title: "", content: "" });
 
-  mapPropstoState = () => {
-    this.setState({
-      title: this.props.project.title ? this.props.project.title : "",
-      content: this.props.project.content ? this.props.project.content : ""
+  const modal1 = useRef();
+
+  const dispatch = useDispatch();
+  const editProjectItem = (id, userInfo) => dispatch(editProject(id, userInfo));
+
+  const mapPropstoState = () => {
+    setValue({
+      title: props.project.title ? props.project.title : "",
+      content: props.project.content ? props.project.content : ""
     });
   };
 
-  handleChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
+  const handleChange = e => {
+    setValue({ ...value, [e.target.id]: e.target.value });
   };
 
-  componentDidMount() {
+  const handleSubmit = e => {
+    e.preventDefault();
+    const id = props.id.split("modal")[1];
+    const userDetails = {
+      title: value.title,
+      content: value.content
+    };
+    editProjectItem(id, userDetails);
+  };
+
+  useEffect(() => {
     const options = {
       onOpenStart: () => {
         console.log("Open Start");
-        this.mapPropstoState();
+        mapPropstoState();
       },
       onOpenEnd: () => {
         console.log("Open End");
@@ -45,80 +56,56 @@ class EditProject extends Component {
       startingTop: "4%",
       endingTop: "10%"
     };
-    M.Modal.init(this.Modal, options);
-  }
+    M.Modal.init(modal1.current, options);
+  }, []);
 
-  handleSubmit = e => {
-    e.preventDefault();
-    const id = this.props.id.split("modal")[1];
-    const userDetails = {
-      title: this.state.title,
-      content: this.state.content
-    };
-    this.props.editProject(id, userDetails);
-  };
-  render() {
-    const { id } = this.props;
-    return (
-      <div>
-        <div
-          ref={Modal => {
-            this.Modal = Modal;
-          }}
-          id={id}
-          className="modal"
-        >
-          <h5 className="modal-close close-btn">&#10005;</h5>
-          <div className="modal-content center">
-            <h4>Edit Project</h4>
-            <form className="modal-form">
-              <div className="input-field">
-                <input
-                  type="text"
-                  name="title"
-                  id="title"
-                  onChange={this.handleChange}
-                  placeholder="Title"
-                  value={this.state.title}
-                />
-                <label className="active" htmlFor="title">
-                  Title
-                </label>
-              </div>
-              <div className="input-field">
-                <textarea
-                  id="content"
-                  name="content"
-                  className="materialize-textarea"
-                  onChange={this.handleChange}
-                  value={this.state.content}
-                  data-length={200}
-                  placeholder="Content"
-                />
-                <label className="active" htmlFor="content">
-                  Content
-                </label>
-              </div>
-            </form>
-          </div>
-          <div className="modal-footer">
-            <button
-              onClick={this.handleSubmit}
-              className="modal-close waves-effect waves-green btn-flat"
-            >
-              Agree
-            </button>
-          </div>
+  return (
+    <div>
+      <div ref={modal1} id={props.id} className="modal">
+        <h5 className="modal-close close-btn">&#10005;</h5>
+        <div className="modal-content center">
+          <h4>Edit Project</h4>
+          <form className="modal-form">
+            <div className="input-field">
+              <input
+                type="text"
+                name="title"
+                id="title"
+                onChange={handleChange}
+                placeholder="Title"
+                value={value.title}
+              />
+              <label className="active" htmlFor="title">
+                Title
+              </label>
+            </div>
+            <div className="input-field">
+              <textarea
+                id="content"
+                name="content"
+                className="materialize-textarea"
+                onChange={handleChange}
+                value={value.content}
+                data-length={200}
+                placeholder="Content"
+              />
+              <label className="active" htmlFor="content">
+                Content
+              </label>
+            </div>
+          </form>
+        </div>
+        <div className="modal-footer">
+          <button
+            onClick={handleSubmit}
+            className="modal-close waves-effect waves-green btn-flat"
+          >
+            Agree
+          </button>
         </div>
       </div>
-    );
-  }
-}
-
-const mapDispatch = {
-  editProject
+    </div>
+  );
 };
-export default connect(
-  null,
-  mapDispatch
-)(EditProject);
+
+export default EditProject;

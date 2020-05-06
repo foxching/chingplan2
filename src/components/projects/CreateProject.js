@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { postProject } from "../../redux/actions/dataAction";
 import { clearErrors } from "../../redux/actions/userAction";
 
-const CreateProject = () => {
+const CreateProject = props => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [errors, setErrors] = useState({});
@@ -32,7 +32,7 @@ const CreateProject = () => {
       title,
       content
     };
-    addProject(projectData, this.props.history);
+    addProject(projectData, props.history);
   };
 
   //USE EFFECT//
