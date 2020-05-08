@@ -1,133 +1,129 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updatePassword } from "../../../redux/actions/userAction";
 import { clearErrors } from "../../../redux/actions/userAction";
 
-class PaswordProfile extends Component {
-  state = {
-    oldPassword: "",
-    newPassword: "",
-    errors: {}
+const PasswordProfile = () => {
+  //local state
+  const [value, setValue] = useState({ oldPassword: "", newPassword: "" });
+  const [errors, setErrors] = useState({});
+
+  //redux action and state
+  const err = useSelector(state => state.UI.errors);
+  const { loading } = useSelector(state => state.UI);
+  const dispatch = useDispatch();
+
+  const update = data => dispatch(updatePassword(data));
+
+  const onHandleChange = e => {
+    setValue({ ...value, [e.target.id]: e.target.value });
   };
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.UI.errors) {
-      this.setState({ errors: nextProps.UI.errors });
-    }
-
-    if (!nextProps.UI.errors && !nextProps.UI.loading) {
-      this.setState({ oldPassword: "", newPassword: "", errors: {} });
-    }
-  }
-
-  componentWillUnmount() {
-    this.props.clearErrors();
-  }
-
-  onHandleChange = e => {
-    this.setState({
-      [e.target.id]: e.target.value
-    });
-  };
-
-  onHandleSubmit = e => {
+  const onHandleSubmit = e => {
     e.preventDefault();
     const passwordData = {
-      oldPassword: this.state.oldPassword,
-      newPassword: this.state.newPassword
+      oldPassword: value.oldPassword,
+      newPassword: value.newPassword
     };
-    this.props.updatePassword(passwordData);
+    update(passwordData);
   };
 
-  render() {
-    const { errors } = this.state;
-    const { loading } = this.props.UI;
-    return (
-      <div className="section">
-        <Helmet>
-          <title>Settings - Password</title>
-          <meta name="description" content="Change Password" />
-        </Helmet>
-        <div className="card card medium z-depth-0">
-          <div className="card-content">
-            <div className="profile">
-              <p className="black-text flow-text">Change Password</p>
-              <form onSubmit={this.onHandleSubmit}>
-                <div className="input-field">
-                  <input
-                    id="oldPassword"
-                    type="password"
-                    onChange={this.onHandleChange}
-                    value={this.state.oldPassword}
-                  />
-                  <label htmlFor="oldPassword" className="active">
-                    Current Password
-                  </label>
-                  {errors.oldPassword && (
-                    <span
-                      className="helper-text red-text "
-                      data-error="wrong"
-                      data-success="right"
-                    >
-                      {errors.oldPassword}
-                    </span>
-                  )}
-                </div>
-                <div className="input-field">
-                  <input
-                    id="newPassword"
-                    type="password"
-                    onChange={this.onHandleChange}
-                    value={this.state.newPassword}
-                  />
-                  <label htmlFor="newPassword" className="active">
-                    New Password
-                  </label>
-                  {errors.newPassword && (
-                    <span
-                      className="helper-text red-text "
-                      data-error="wrong"
-                      data-success="right"
-                    >
-                      {errors.newPassword}
-                    </span>
-                  )}
-                </div>
+  //sett error
+  useEffect(() => {
+    setErrors(err);
+  }, [errors, err]);
 
-                {errors.general && (
-                  <>
-                    <span className="red-text" style={{ marginTop: 5 }}>
-                      {errors.general}
-                    </span>
-                    <br />
-                  </>
+  //clear inputs if no errors
+  useEffect(() => {
+    if (!err && !loading) {
+      setValue({ oldPassword: "", newPassword: "" });
+      setErrors({});
+    }
+  }, [err, loading]);
+
+  //clear error when unmount
+  useEffect(() => {
+    const clearUIErrors = () => dispatch(clearErrors());
+    return () => {
+      clearUIErrors();
+    };
+  }, [dispatch]);
+
+  return (
+    <div className="section">
+      <Helmet>
+        <title>Settings - Password</title>
+        <meta name="description" content="Change Password" />
+      </Helmet>
+      <div className="card card medium z-depth-0">
+        <div className="card-content">
+          <div className="profile">
+            <p className="black-text flow-text">Change Password</p>
+            <form onSubmit={onHandleSubmit}>
+              <div className="input-field">
+                <input
+                  id="oldPassword"
+                  type="password"
+                  onChange={onHandleChange}
+                  value={value.oldPassword}
+                />
+                <label htmlFor="oldPassword" className="active">
+                  Current Password
+                </label>
+                {errors !== null && errors.oldPassword && (
+                  <span
+                    className="helper-text red-text "
+                    data-error="wrong"
+                    data-success="right"
+                  >
+                    {errors.oldPassword}
+                  </span>
                 )}
+              </div>
+              <div className="input-field">
+                <input
+                  id="newPassword"
+                  type="password"
+                  onChange={onHandleChange}
+                  value={value.newPassword}
+                />
+                <label htmlFor="newPassword" className="active">
+                  New Password
+                </label>
+                {errors !== null && errors.newPassword && (
+                  <span
+                    className="helper-text red-text "
+                    data-error="wrong"
+                    data-success="right"
+                  >
+                    {errors.newPassword}
+                  </span>
+                )}
+              </div>
 
-                <button
-                  disabled={loading}
-                  className="btn grey darken-1 z-index-0"
-                >
-                  Update
-                </button>
-                <div className="container red-text center" />
-              </form>
-            </div>
+              {errors !== null && errors.general && (
+                <>
+                  <span className="red-text" style={{ marginTop: 5 }}>
+                    {errors.general}
+                  </span>
+                  <br />
+                </>
+              )}
+
+              <button
+                disabled={loading}
+                className="btn grey darken-1 z-index-0"
+              >
+                Update
+              </button>
+              <div className="container red-text center" />
+            </form>
           </div>
         </div>
       </div>
-    );
-  }
-}
-const mapStateToProps = state => ({
-  UI: state.UI
-});
-
-const mapDispatch = {
-  updatePassword,
-  clearErrors
+    </div>
+  );
 };
-export default connect(
-  mapStateToProps,
-  mapDispatch
-)(PaswordProfile);
+
+export default PasswordProfile;
