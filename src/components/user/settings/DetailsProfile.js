@@ -2,7 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import EditProfile from "../EditProfile";
 
-const AuthenticatedProfile = props => {
+const DetailsProfile = props => {
   const {
     user: {
       credentials: { bio, website, location }
@@ -23,7 +23,7 @@ const AuthenticatedProfile = props => {
               <div className="input-field">
                 <textarea
                   disabled
-                  value={bio}
+                  value={bio ? bio : ""}
                   className="materialize-textarea"
                 />
                 <label htmlFor="bio" className="active">
@@ -31,13 +31,13 @@ const AuthenticatedProfile = props => {
                 </label>
               </div>
               <div className="input-field">
-                <input type="text" disabled value={location} />
+                <input type="text" disabled value={location ? location : ""} />
                 <label htmlFor="location" className="active">
                   Location
                 </label>
               </div>
               <div className="input-field">
-                <input type="text" disabled value={website} />
+                <input type="text" disabled value={website ? website : ""} />
                 <label htmlFor="website" className="active">
                   Website
                 </label>
@@ -51,4 +51,4 @@ const AuthenticatedProfile = props => {
   );
 };
 
-export default AuthenticatedProfile;
+export default DetailsProfile;

@@ -1,37 +1,40 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { useState, useEffect, useRef } from "react";
+
 import { toastr } from "react-redux-toastr";
 import M from "materialize-css";
 import "materialize-css/dist/css/materialize.min.css";
+//redux
+import { useDispatch, useSelector } from "react-redux";
 import { editUserDetails } from "../../redux/actions/userAction";
+//components
 import MyButton from "../../util/MyButton";
 
-class EditProfile extends Component {
-  state = {
-    bio: "",
-    website: "",
-    location: ""
-  };
+const EditProfile = () => {
+  const [value, setValue] = useState({ bio: "", location: "", website: "" });
 
-  mapUserDetailsToState = credentials => {
-    this.setState({
+  const modal1 = useRef();
+  const credentials = useSelector(state => state.user.credentials);
+
+  const dispatch = useDispatch();
+  const edit = creds => dispatch(editUserDetails(creds));
+
+  const mapUserDetailsToState = credentials => {
+    setValue({
       bio: credentials.bio ? credentials.bio : "",
-      website: credentials.website ? credentials.website : "",
-      location: credentials.location ? credentials.location : ""
+      location: credentials.location ? credentials.location : "",
+      website: credentials.website ? credentials.website : ""
     });
   };
 
-  handleChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
+  const handleChange = e => {
+    setValue({ ...value, [e.target.name]: e.target.value });
   };
 
-  componentDidMount() {
+  useEffect(() => {
     const options = {
       onOpenStart: () => {
         console.log("Open Start");
-        this.mapUserDetailsToState(this.props.credentials);
+        mapUserDetailsToState(credentials);
       },
       onOpenEnd: () => {
         console.log("Open End");
@@ -49,114 +52,97 @@ class EditProfile extends Component {
       startingTop: "4%",
       endingTop: "10%"
     };
-    M.Modal.init(this.Modal, options);
-    const { credentials } = this.props;
-    this.mapUserDetailsToState(credentials);
-  }
+    M.Modal.init(modal1.current, options);
+    mapUserDetailsToState(credentials);
+  }, [credentials]);
 
-  handleSubmit = async e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     const userDetails = {
-      bio: this.state.bio,
-      website: this.state.website,
-      location: this.state.location
+      bio: value.bio,
+      website: value.website,
+      location: value.location
     };
 
     try {
-      await this.props.editUserDetails(userDetails);
+      await edit(userDetails);
       toastr.success("Success", "Details has been updated!");
     } catch (err) {
       toastr.error("Error", "There is something wrong!");
     }
   };
-  render() {
-    return (
-      <React.Fragment>
-        <div className="center-align">
-          <MyButton
-            tip="edit details"
-            btnClassName="waves-light waves-effect btn modal-trigger btn-flat button  "
-            target="modal1"
-          >
-            <i className="tiny material-icons">edit</i>
-          </MyButton>
-        </div>
 
-        <div
-          ref={Modal => {
-            this.Modal = Modal;
-          }}
-          id="modal1"
-          className="modal"
+  return (
+    <React.Fragment>
+      <div className="center-align">
+        <MyButton
+          tip="edit details"
+          btnClassName="waves-light waves-effect btn modal-trigger btn-flat button  "
+          target="modal1"
         >
-          <h5 className="modal-close close-btn">&#10005;</h5>
-          <div className="modal-content center">
-            <h4>Edit Details</h4>
-            <form className="modal-form">
-              <div className="input-field">
-                <textarea
-                  id="bio"
-                  name="bio"
-                  className="materialize-textarea"
-                  onChange={this.handleChange}
-                  value={this.state.bio}
-                  placeholder="Bio"
-                />
-                <label className="active" htmlFor="bio">
-                  Bio
-                </label>
-              </div>
+          <i className="tiny material-icons">edit</i>
+        </MyButton>
+      </div>
 
-              <div className="input-field">
-                <input
-                  type="text"
-                  name="website"
-                  id="website"
-                  onChange={this.handleChange}
-                  placeholder="Website"
-                  value={this.state.website}
-                />
-                <label className="active" htmlFor="website">
-                  Website
-                </label>
-              </div>
-              <div className="input-field">
-                <input
-                  type="text"
-                  id="location"
-                  name="location"
-                  onChange={this.handleChange}
-                  placeholder="Location"
-                  value={this.state.location}
-                />
-                <label className="active" htmlFor="location">
-                  Location
-                </label>
-              </div>
-            </form>
-          </div>
-          <div className="modal-footer">
-            <button
-              href="#!"
-              onClick={this.handleSubmit}
-              className="modal-close waves-effect waves-green btn-flat"
-            >
-              Saved
-            </button>
-          </div>
+      <div ref={modal1} id="modal1" className="modal">
+        <h5 className="modal-close close-btn">&#10005;</h5>
+        <div className="modal-content center">
+          <h4>Edit Details</h4>
+          <form className="modal-form">
+            <div className="input-field">
+              <textarea
+                id="bio"
+                name="bio"
+                className="materialize-textarea"
+                onChange={handleChange}
+                value={value.bio}
+                placeholder="Bio"
+              />
+              <label className="active" htmlFor="bio">
+                Bio
+              </label>
+            </div>
+
+            <div className="input-field">
+              <input
+                type="text"
+                name="website"
+                id="website"
+                onChange={handleChange}
+                placeholder="Website"
+                value={value.website}
+              />
+              <label className="active" htmlFor="website">
+                Website
+              </label>
+            </div>
+            <div className="input-field">
+              <input
+                type="text"
+                id="location"
+                name="location"
+                onChange={handleChange}
+                placeholder="Location"
+                value={value.location}
+              />
+              <label className="active" htmlFor="location">
+                Location
+              </label>
+            </div>
+          </form>
         </div>
-      </React.Fragment>
-    );
-  }
-}
-
-const mapStateToProps = state => ({
-  credentials: state.user.credentials
-});
-const mapDispatch = {
-  editUserDetails
+        <div className="modal-footer">
+          <button
+            href="#!"
+            onClick={handleSubmit}
+            className="modal-close waves-effect waves-green btn-flat"
+          >
+            Saved
+          </button>
+        </div>
+      </div>
+    </React.Fragment>
+  );
 };
-export default connect(
-  mapStateToProps,
-  mapDispatch
-)(EditProfile);
+
+export default EditProfile;

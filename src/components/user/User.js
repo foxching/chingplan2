@@ -1,60 +1,45 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ProjectList from "../projects/ProjectList";
 import StaticProfile from "./StaticProfile";
 import ProfileSkeleton from "../../util/ProfileSkeleton";
 import { getUserData } from "../../redux/actions/dataAction";
 
-class UserDetails extends Component {
-  state = {
-    profile: null
-  };
+const UserDetails = props => {
+  const [profile, setProfile] = useState(null);
 
-  componentDidMount() {
-    this.props.getUserData(this.props.match.params.handle);
+  const { projects, loading } = useSelector(state => state.data);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const getData = handle => dispatch(getUserData(handle));
+    getData(props.match.params.handle);
+
     axios
-      .get(`/user/${this.props.match.params.handle}`)
+      .get(`/user/${props.match.params.handle}`)
       .then(res => {
-        console.log(res.data);
-        this.setState({
-          profile: res.data.user
-        });
+        setProfile(res.data.user);
       })
       .catch(err => console.log(err));
-  }
+  }, [dispatch, props.match.params.handle]);
 
-  render() {
-    const { projects, loading } = this.props.data;
-    const { profile } = this.state;
-
-    return (
-      <div className="dashboard container">
-        <div className="row">
-          <div className="col s12 m6">
-            <ProjectList projects={projects} loading={loading} />
-          </div>
-          <div className="col s12 m5 offset-m1">
-            {profile === null ? (
-              <ProfileSkeleton />
-            ) : (
-              <StaticProfile profile={profile} />
-            )}
-          </div>
+  return (
+    <div className="dashboard container">
+      <div className="row">
+        <div className="col s12 m6">
+          <ProjectList projects={projects} loading={loading} />
+        </div>
+        <div className="col s12 m5 offset-m1">
+          {profile === null ? (
+            <ProfileSkeleton />
+          ) : (
+            <StaticProfile profile={profile} />
+          )}
         </div>
       </div>
-    );
-  }
-}
-
-const mapStateToProps = state => ({
-  data: state.data
-});
-
-const mapDispatch = {
-  getUserData
+    </div>
+  );
 };
-export default connect(
-  mapStateToProps,
-  mapDispatch
-)(UserDetails);
+
+export default UserDetails;
