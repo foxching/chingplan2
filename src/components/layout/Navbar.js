@@ -7,11 +7,12 @@ import SignedOutLinks from "./SignedOutLinks";
 const Navbar = () => {
   const {
     authenticated,
+    loading,
     credentials: { handle, imageUrl }
   } = useSelector(state => state.user);
 
   const links = authenticated ? (
-    <SignedInLinks imageUrl={imageUrl} handle={handle} />
+    <SignedInLinks loading={loading} imageUrl={imageUrl} handle={handle} />
   ) : (
     <SignedOutLinks />
   );
