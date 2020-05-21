@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Switch, Route, Redirect } from "react-router-dom";
-import DetailsProfile from "./DetailsProfile";
-import PhotosProfile from "./PhotosProfile";
-import PasswordProfile from "./PasswordProfile";
+import Details from "./Details";
+import Photos from "./Photos";
+import Password from "./Password";
 import SettingsNav from "./SettingsNav";
 
 const Settings = () => {
@@ -16,16 +16,13 @@ const Settings = () => {
             <Redirect exact from="/settings" to="/settings/basic" />
             <Route
               path="/settings/basic"
-              render={() => <DetailsProfile user={user} />}
+              render={() => <Details user={user} />}
             />
             <Route
               path="/settings/photos"
-              render={() => <PhotosProfile user={user} />}
+              render={() => <Photos user={user} />}
             />
-            <Route
-              path="/settings/password"
-              render={() => <PasswordProfile />}
-            />
+            <Route path="/settings/password" render={() => <Password />} />
           </Switch>
         </div>
         <div className="col s12 m3 offset m-1 ">

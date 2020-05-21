@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import EditProfile from "../EditProfile";
+import EditProfile from "../profile/EditProfile";
 
 const DetailsProfile = props => {
   const {

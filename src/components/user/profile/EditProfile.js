@@ -5,9 +5,9 @@ import M from "materialize-css";
 import "materialize-css/dist/css/materialize.min.css";
 //redux
 import { useDispatch, useSelector } from "react-redux";
-import { editUserDetails } from "../../redux/actions/userAction";
+import { editUserDetails } from "../../../redux/actions/userAction";
 //components
-import MyButton from "../../util/MyButton";
+import MyButton from "../../../util/MyButton";
 
 const EditProfile = () => {
   const [value, setValue] = useState({ bio: "", location: "", website: "" });

@@ -12,7 +12,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import ProjectDetails from "./components/projects/ProjectDetails";
 import CreateProject from "./components/projects/CreateProject";
 import User from "./components/user/User";
-import Settings from "./components/user/settings/Settings";
+import SettingsDashboard from "./components/user/settings/SettingsDashboard";
 import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
 
@@ -59,7 +59,7 @@ class App extends Component {
             <Switch>
               <Route path="/" component={Dashboard} exact />
               <PrivateRoute path="/users/:handle" component={User} />
-              <PrivateRoute path="/settings" component={Settings} />
+              <PrivateRoute path="/settings" component={SettingsDashboard} />
               <PrivateRoute
                 path="/project/:projectId"
                 component={ProjectDetails}
